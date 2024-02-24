@@ -8,7 +8,7 @@ def quatize_gguf(model):
     pass
 
 def setup_args():
-    args = argparse.ArgumentParser(description="Quantasarus")
+    args = argparse.ArgumentParser(description="Quantasarus", epilog="Quantasarus is a tool for quantizing HuggingFace models")
     args.add_argument("--repo", type=str, help="The HuggingFace repository to download from", required=True)
     args.add_argument("--file", type=str, help="The file to download from the repository", default="")
     return args.parse_args()
