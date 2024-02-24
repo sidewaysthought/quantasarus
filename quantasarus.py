@@ -10,20 +10,19 @@ def download(repo, file=""):
     if not os.path.exists("models"):
         os.makedirs("models")
 
+    repo_split = repo.split("/")
+    owner = repo_split[0]
+    model = repo_split[1]
     if file != "":
-        # Split the repo on the / to get the owner and model name
-        repo_split = repo.split("/")
-        owner = repo_split[0]
-        model = repo_split[1]
         dest_path = os.path.join(BASE_MODEL_DIR, owner, model)
     else:
         dest_path = os.path.join(BASE_MODEL_DIR, owner)
 
     try:
         if file == "":
-            snapshot_download(repo_id=repo, local_dir=dest_path)
+            snapshot_download(repo_id=repo, local_dir=dest_path, local_dir_use_symlinks=False)
         else:
-            hf_hub_download(repo_id=repo, filename=file, local_dir=dest_path)
+            hf_hub_download(repo_id=repo, filename=file, local_dir=dest_path, local_dir_use_symlinks=False)
     except Exception as e:
         print(f"Error: {e}")
         exit()
